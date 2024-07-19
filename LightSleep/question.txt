@@ -1,0 +1,3 @@
+利用Timer作为唤醒源，设置7秒时间，去唤醒正在活动LightSleep模式，当代码执行到esp_light_sleep_start的时候，用测功耗仪器测试，可以看出来ESP32功耗明显下载，可以看出来已经进入了LightSleep模式，7秒过后，功耗仪器有明显的上升，但是esp_light_sleep_start后面的代码无法执行，使得我们无法通过串口确认是否醒来
+
+利用高低电平去作为唤醒源，利用ESP32 BOOT按键去实现，但是在esp32的IDF中，发现esp_sleep_enable_gpio_wakeup()是一个空函数，需要gpio_wakeup_enable（），该函数需要传递两个参数，去告诉CPU用什么GPIO脚和利用什么电平去实现，在Arduino平台上面会报错，不知道利用什么函数去传递
